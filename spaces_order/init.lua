@@ -568,6 +568,7 @@ end
 -- appWatcher:start()
 -- M._appWatcher = appWatcher
 
+-- Reorder full-screen spaces now
 hs.hotkey.bind(cfg.hotkey_mods, cfg.hotkey_key, function()
     M.forceReorder()
 end)

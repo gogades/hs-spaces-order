@@ -1,3 +1,9 @@
+-- ── Hotkey help (⌃⌥/) ─────────────────────────────────────────────
+-- Must be required first: it records every hotkey bound after it.
+-- The comment directly above each hs.hotkey.bind() call becomes that
+-- hotkey's description in the dialog.
+local hotkeyHelp = require("hotkey_help")
+
 -- ── Spaces Order module ───────────────────────────────────────────
 -- Keeps configured apps full-screened in a predictable Mission Control
 -- order.  Edit ~/.hammerspoon/spaces_order/config.lua to customise.
@@ -63,17 +69,17 @@ local function focus_app(appname)
 end
 
 
--- take all apps  out of full screen
+-- Take all apps out of full screen
 hs.hotkey.bind({"option", "ctrl"}, "f", function()
   no_full_screen()
 end)
 
--- set some app in full screen
+-- Full-screen my main apps
 hs.hotkey.bind({"option", "ctrl"}, "q", function()
   go_full_screen()
 end)
 
--- set some app in full screen
+-- Toggle full screen: exit on the 40" screen, enter otherwise
 hs.hotkey.bind({"option", "ctrl"}, "r", function()
   local uuid = hs.screen.primaryScreen():getUUID()
   if uuid == "F1F3CB48-061A-2605-D519-12079E868634" then
@@ -83,7 +89,7 @@ hs.hotkey.bind({"option", "ctrl"}, "r", function()
   end
 end)
 
--- find iTerm2 and focus it
+-- Open iTerm2
 hs.hotkey.bind({"option", "ctrl"}, "t", function()
   hs.application.launchOrFocus("iTerm2")
 end)
