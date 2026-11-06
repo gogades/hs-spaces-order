@@ -75,10 +75,10 @@ local function focus_app(appname)
 end
 
 
--- Take all apps out of full screen
-hs.hotkey.bind({"option", "ctrl"}, "f", function()
-  no_full_screen()
-end)
+-- -- Take all apps out of full screen
+-- hs.hotkey.bind({"option", "ctrl"}, "f", function()
+--   no_full_screen()
+-- end)
 
 -- Full-screen my main apps
 hs.hotkey.bind({"option", "ctrl"}, "q", function()
@@ -138,6 +138,11 @@ end)
 -- Open VS Code
 hs.hotkey.bind({"option", "ctrl"}, "v", function()
   appCycle.launchOrCycle("com.microsoft.VSCode")
+end)
+
+-- Open Finder
+hs.hotkey.bind({"option", "ctrl"}, "f", function()
+  appCycle.launchOrCycle("com.apple.finder")
 end)
 
 local screens = hs.screen.allScreens()
