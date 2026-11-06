@@ -9,7 +9,7 @@
 -- Description of each hotkey, first match wins:
 --   1. the comment line(s) directly above the bind call
 --   2. a trailing comment on the bind line itself
---   3. a guess from the body, e.g. launchOrFocus("Sonos") → "Open Sonos"
+--   3. a guess from the body, e.g. launchOrFocus("Sonos") / launchOrCycle("Sonos") → "Open Sonos"
 --   4. "(no description)"
 --
 -- Require this FIRST in ~/.hammerspoon/init.lua so it sees every bind.
@@ -74,7 +74,7 @@ local function describeFromSource(path, lineNo)
     -- 3. Guess from the body (up to the closing "end)").
     for j = lineNo, math.min(lineNo + 15, #lines) do
         local l = lines[j]
-        local app = l:match("launchOrFocus%(%s*[\"'](.-)[\"']")
+        local app = l:match("launchOr%a+%(%s*[\"'](.-)[\"']")
         if app then return "Open " .. app end
         local fn = l:match("^%s*([%w_%.:]+)%(%s*%)%s*$")
         if fn and j > lineNo then

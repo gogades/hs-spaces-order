@@ -24,15 +24,23 @@ return {
     apps = {
         "Google Chrome",
         "Home Assistant",
-        "Messages",
+        -- Chrome web apps: the window may belong to the web-app process
+        -- (matched by bundle ID) or to Google Chrome itself (matched by
+        -- window title), depending on Chrome version.
+        {
+            name  = "Messages",
+            match = {
+                -- Google Messages web app, and Apple Messages
+                { app = { "com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph", "com.apple.MobileSMS" } },
+                { app = "com.google.Chrome", title = "^Messages" },
+            },
+        },
         "Messenger",
         {
             name  = "Google Chat",
-            -- Chrome web apps: the window may belong to the web-app shim
-            -- process or to Google Chrome itself, depending on version.
             match = {
-                { app = "Google Chat" },
-                { app = "Google Chrome", title = "Google Chat" },
+                { app = "com.google.Chrome.app.pommaclcbfghclhalboakcipcmmndhcj" },
+                { app = "com.google.Chrome", title = "Google Chat" },
             },
         },
         "Claude",

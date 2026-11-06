@@ -4,6 +4,12 @@
 -- hotkey's description in the dialog.
 local hotkeyHelp = require("hotkey_help")
 
+-- ── App launch / cycle ────────────────────────────────────────────
+-- appCycle.launchOrCycle(bundleID or name): launch or focus the app; if it is
+-- already in front, go to its next window (e.g. next full-screen
+-- Chrome or VS Code window).
+local appCycle = require("app_cycle")
+
 -- ── Spaces Order module ───────────────────────────────────────────
 -- Keeps configured apps full-screened in a predictable Mission Control
 -- order.  Edit ~/.hammerspoon/spaces_order/config.lua to customise.
@@ -89,37 +95,49 @@ hs.hotkey.bind({"option", "ctrl"}, "r", function()
   end
 end)
 
+-- App shortcuts.  Use bundle IDs (find one with:
+--   defaults read "/Applications/X.app/Contents/Info" CFBundleIdentifier)
+-- because launching by name needs the exact .app file name, which often
+-- differs from the app's display name (iTerm.app, "Google Chat 1.app"…).
+
 -- Open iTerm2
 hs.hotkey.bind({"option", "ctrl"}, "t", function()
-  hs.application.launchOrFocus("iTerm2")
+  appCycle.launchOrCycle("com.googlecode.iterm2")
 end)
 
+-- Open Google Chrome
 hs.hotkey.bind({"option", "ctrl"}, "c", function()
-  hs.application.launchOrFocus("Google Chrome")
+  appCycle.launchOrCycle("com.google.Chrome")
 end)
 
+-- Open Google Messages (Chrome web app)
 hs.hotkey.bind({"option", "ctrl"}, "m", function()
-  hs.application.launchOrFocus("Messages")
+  appCycle.launchOrCycle("com.google.Chrome.app.hpfldicfbfomlpcikngkocigghgafkph")
 end)
 
+-- Open Bitwarden
 hs.hotkey.bind({"option", "ctrl"}, "b", function()
-  hs.application.launchOrFocus("Bitwarden")
+  appCycle.launchOrCycle("com.bitwarden.desktop")
 end)
 
+-- Open Home Assistant
 hs.hotkey.bind({"option", "ctrl"}, "h", function()
-  hs.application.launchOrFocus("Home Assistant")
+  appCycle.launchOrCycle("io.robbie.HomeAssistant")
 end)
 
+-- Open Sonos
 hs.hotkey.bind({"option", "ctrl"}, "s", function()
-  hs.application.launchOrFocus("Sonos")
+  appCycle.launchOrCycle("com.sonos.macController2")
 end)
 
+-- Open Google Chat (Chrome web app)
 hs.hotkey.bind({"option", "ctrl"}, "g", function()
-  hs.application.launchOrFocus("Google Chat")
+  appCycle.launchOrCycle("com.google.Chrome.app.pommaclcbfghclhalboakcipcmmndhcj")
 end)
 
+-- Open VS Code
 hs.hotkey.bind({"option", "ctrl"}, "v", function()
-  hs.application.launchOrFocus("Code")
+  appCycle.launchOrCycle("com.microsoft.VSCode")
 end)
 
 local screens = hs.screen.allScreens()
